@@ -17,19 +17,25 @@ hold_key(key) {
 }
 
 elemental_sight() {
-  send {mbutton down}
-  sleep 2000
-  send {mbutton up}
+	elemental := "mbutton"	; set to elemental key
+
+  send {%elemental% down}
+  sleep 3000
+  send {%elemental% up}
 }
 
 fast_pickup() {
-  send, {wheeldown 1}f
+	loot := "f"	; set to loot key
+
+  send, {wheeldown 1}%loot%
 }
 
 ; toggle fast pickup
+; change t to preferred toggle key
 t::SetTimer, fast_pickup, % (i := !i) ? "100" : "off"
 
 ; toggle elemental sight
+; change mbutton to preferred toggle key
 mbutton::SetTimer, elemental_sight, % (i := !i) ? "100" : "off"
 
 ; hold to dash
@@ -37,6 +43,8 @@ $rbutton::
 dash("rbutton")
 return
 
-; map mouse button to e
-; mbutton::e
-; hold_key(mbutton)
+; map a mouse button to a key
+; xbutton1::k
+
+; enable hold key for mouse buttons
+; hold_key(xbutton1)
