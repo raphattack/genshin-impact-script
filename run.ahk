@@ -27,10 +27,10 @@ fast_pickup() {
 }
 
 ; toggle fast pickup
-t::SetTimer, fast_pickup, % (i := !i) ? "1" : "off"
+t::SetTimer, fast_pickup, % (i := !i) ? "100" : "off"
 
 ; toggle elemental sight
-mbutton::SetTimer, elemental_sight, % (i := !i) ? "1" : "off"
+mbutton::SetTimer, elemental_sight, % (i := !i) ? "100" : "off"
 
 ; hold to dash
 $rbutton::
