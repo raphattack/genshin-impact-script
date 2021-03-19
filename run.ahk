@@ -23,7 +23,7 @@ elemental_sight() {
 }
 
 fast_pickup() {
-	send, {wheeldown 1}f
+  send, {wheeldown 1}f
 }
 
 ; toggle fast pickup
