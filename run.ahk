@@ -28,6 +28,7 @@ fast_pickup() {
 	loot := "f"	; set to loot key
 
   send, {wheeldown 1}%loot%
+  sleep 30
 }
 
 ; toggle fast pickup
