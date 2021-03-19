@@ -1,5 +1,12 @@
 #IfWinActive Genshin Impact
 
+dash(key) {
+  while GetKeyState(key, "p") then {
+    click right
+    sleep 1250
+  }
+}
+
 hold_key(key) {
   key_down := !key_down
   if key_down
@@ -9,52 +16,21 @@ hold_key(key) {
   return
 }
 
-dash(key) {
-  while GetKeyState(key, "p") then {
-    click right
-    sleep 1250
-  }
-}
-
-; toggle fast pickup
-#MaxThreadsPerHotkey 3
-t::
-#MaxThreadsPerHotkey 1
-SetKeyDelay, 10, 30
-
-if is_running {
-  is_running := false
-  return
-}
-
-is_running := true
-loop {
-  send, {wheeldown 1}f
-  if not is_running
-    break
-}
-is_running := false
-return
-
-; toggle elemental sight
-#MaxThreadsPerHotkey 3
-mbutton::
-#MaxThreadsPerHotkey 1
-if is_running {
-  is_running := false
-  return
-}
-
-is_running := true
-loop {
+elemental_sight() {
   send {mbutton down}
   sleep 2000
   send {mbutton up}
-  if not is_running
-    break
 }
-is_running := false
-return
+
+fast_pickup() {
+	send, {wheeldown 1}f
+}
+
+; toggle fast pickup
+t::SetTimer, fast_pickup, % (i := !i) ? "1" : "off"
+
+; toggle elemental sight
+mbutton::SetTimer, elemental_sight, % (i := !i) ? "1" : "off"
 
 ; hold to dash
 $rbutton::
