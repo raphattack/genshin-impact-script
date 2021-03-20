@@ -72,8 +72,7 @@ $rbutton::  ; hold right-click to auto dash
   auto_dash()
   return
 
-; xbutton1::  ; map xbutton1 to key k
-;   k         
+; xbutton1::k         ; map xbutton1 to key k
 ; hold_key(xbutton1)  ; enables hold functionality for mouse button xbutton1
 
 #if
