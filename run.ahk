@@ -47,6 +47,11 @@ elemental_sight(key) {
   send {%key% up}
 }
 
+/*
+*  ends the timer when switching windows
+*
+*  timer_name: the timer to end
+*/
 end_timer(timer_name) {
   if (!winactive(window_title)) {
       i := 0
@@ -55,19 +60,19 @@ end_timer(timer_name) {
   }
 }
 
-t::
-  SetTimer, % loot, % (i := !i) ? "100" : "off"            ; set t to the key to toggle auto loot on/off
+t:: ; set t to the key to toggle auto loot on/off
+  SetTimer, % loot, % (i := !i) ? "100" : "off"
   return
 
-mbutton::
-  SetTimer, % elemental, % (i := !i) ? "100" : "off" ; set mbutton to the key to toggle elemental sight on/off
+mbutton:: ; set mbutton to the key to toggle elemental sight on/off
+  SetTimer, % elemental, % (i := !i) ? "100" : "off"
   return
 
 $rbutton::  ; hold right-click to auto dash
   auto_dash()
   return
 
-; xbutton1::  ; map mouse button xbutton1 to key k
+; xbutton1::  ; map xbutton1 to key k
 ;   k         
 ; hold_key(xbutton1)  ; enables hold functionality for mouse button xbutton1
 
