@@ -1,6 +1,6 @@
 global window_title := "Genshin Impact"
-global loot := Func("auto_loot").Bind("f")                   ; set f to the key used to loot
-global elemental := Func("elemental_sight").Bind("mbutton")  ; set mbutton to the key used for elemental sight
+global loot := func("auto_loot").bind("f")                   ; set f to the key used to loot
+global elemental := func("elemental_sight").bind("mbutton")  ; set mbutton to the key used for elemental sight
 
 #if winactive(window_title)
 
@@ -8,7 +8,7 @@ global elemental := Func("elemental_sight").Bind("mbutton")  ; set mbutton to th
 *  auto dash when holding right-click
 */
 auto_dash() {
-  while GetKeyState("rbutton", "p") then {
+  while getkeystate("rbutton", "p") then {
     click right
     sleep 1250
   }
@@ -61,11 +61,11 @@ end_timer(timer_name) {
 }
 
 t:: ; set t to the key to toggle auto loot on/off
-  SetTimer, % loot, % (i := !i) ? "100" : "off"
+  settimer, % loot, % (i := !i) ? "100" : "off"
   return
 
 mbutton:: ; set mbutton to the key to toggle elemental sight on/off
-  SetTimer, % elemental, % (i := !i) ? "100" : "off"
+  settimer, % elemental, % (i := !i) ? "100" : "off"
   return
 
 $rbutton::  ; hold right-click to auto dash
