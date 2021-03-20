@@ -1,7 +1,8 @@
-#IfWinActive Genshin Impact
+global window_title := "Genshin Impact"
+global loot := Func("auto_loot").Bind("f")                   ; set f to the key used to loot
+global elemental := Func("elemental_sight").Bind("mbutton")  ; set mbutton to the key used for elemental sight
 
-loot := Func("auto_loot").Bind("f")                   ; set f to the key used to loot
-elemental := Func("elemental_sight").Bind("mbutton")  ; set mbutton to the key used for elemental sight
+#if winactive(window_title)
 
 /*
 *  auto dash when holding right-click
@@ -17,6 +18,7 @@ auto_dash() {
 *  auto loot when toggle is on
 */
 auto_loot(key) {
+  end_timer(loot)
   send, % "{wheeldown 1}" . key
 }
 
@@ -39,17 +41,34 @@ hold_key(key) {
 *  hold elemental sight for 3s intervals when toggle is on
 */
 elemental_sight(key) {
+  end_timer(elemental)
   send {%key% down}
   sleep 3000
   send {%key% up}
 }
 
-t::SetTimer, % loot, % (i := !i) ? "100" : "off"            ; set t to the key to toggle auto loot on/off
-mbutton::SetTimer, % elemental, % (i := !i) ? "100" : "off" ; set mbutton to the key to toggle elemental sight on/off
+end_timer(timer_name) {
+  if (!winactive(window_title)) {
+      i := 0
+      SetTimer, % timer_name, Off
+      return
+  }
+}
+
+t::
+  SetTimer, % loot, % (i := !i) ? "100" : "off"            ; set t to the key to toggle auto loot on/off
+  return
+
+mbutton::
+  SetTimer, % elemental, % (i := !i) ? "100" : "off" ; set mbutton to the key to toggle elemental sight on/off
+  return
 
 $rbutton::  ; hold right-click to auto dash
-auto_dash()
-return
+  auto_dash()
+  return
 
-; xbutton1::k         ; map mouse button xbutton1 to key k
+; xbutton1::  ; map mouse button xbutton1 to key k
+;   k         
 ; hold_key(xbutton1)  ; enables hold functionality for mouse button xbutton1
+
+#if
